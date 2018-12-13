@@ -9,22 +9,36 @@
 import UIKit
 
 class StockDetailedViewController: UIViewController {
+    
+    var stockDetailOfPerson: StockInfo!
+    
+    
+    @IBOutlet weak var dateLabel: UILabel!
+    @IBOutlet weak var stockImage: UIImageView!
+    @IBOutlet weak var openLabel: UILabel!
+    @IBOutlet weak var closeLabel: UILabel!
+    
 
     override func viewDidLoad() {
         super.viewDidLoad()
-
-        // Do any additional setup after loading the view.
+        updatedStockInfo()
+        print(stockDetailOfPerson.date)
+        
+        
     }
     
-
-    /*
-    // MARK: - Navigation
-
-    // In a storyboard-based application, you will often want to do a little preparation before navigation
-    override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
-        // Get the new view controller using segue.destination.
-        // Pass the selected object to the new view controller.
+    
+    func updatedStockInfo() {
+        dateLabel.text = stockDetailOfPerson.date
+        openLabel.text = "$" + String(format: "%.2f", stockDetailOfPerson.open)
+        closeLabel.text = "$" + String(format: "%.2f", stockDetailOfPerson.close)
+        
+        if stockDetailOfPerson.open < stockDetailOfPerson.close {
+            stockImage.image = UIImage(named: "thumbsUp")
+            self.view.backgroundColor = .green
+        } else {
+            stockImage.image = UIImage(named: "thumbsDown")
+            self.view.backgroundColor = .red
+        }
     }
-    */
-
 }
